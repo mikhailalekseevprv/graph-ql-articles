@@ -1,0 +1,245 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1659264831118-1
+      author: akazlanzhy
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                  name: id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                    unique: true
+                    uniqueConstraintName: users_email_uk
+                  name: email
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: encoded_password
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: first_name
+                  type: VARCHAR(60)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: last_name
+                  type: VARCHAR(60)
+              - column:
+                  name: avatar
+                  type: VARCHAR(100)
+              - column:
+                  name: info
+                  type: VARCHAR(255)
+
+            tableName: users
+
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                  name: id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: type
+                  type: VARCHAR(30)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: title
+                  type: VARCHAR(60)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: text
+                  type: TEXT
+              - column:
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_articles_to_user_id
+                    references: users(id)
+                  name: author_id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: created_at
+                  type: datetime
+              - column:
+                  name: scientific_theory
+                  type: VARCHAR(255)
+              - column:
+                  name: publication_style
+                  type: VARCHAR(60)
+              - column:
+                  name: geographical_target
+                  type: VARCHAR(255)
+              - column:
+                  name: age_target
+                  type: VARCHAR(255)
+              - column:
+                  name: sex_target
+                  type: VARCHAR(255)
+            tableName: articles
+
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                  name: id
+                  type: INT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: text
+                  type: VARCHAR(30)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: created_at
+                  type: datetime
+              - column:
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_comments_to_user_id
+                    references: users(id)
+                  name: user_id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_comments_to_article_id
+                    references: articles(id)
+                  name: article_id
+                  type: BIGINT
+            tableName: comments
+
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_article_claps
+                    foreignKeyName: fk_article_claps_to_user_id
+                    references: users(id)
+                  name: user_id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_article_claps
+                    foreignKeyName: fk_article_claps_to_article_id
+                    references: articles(id)
+                  name: article_id
+                  type: BIGINT
+            tableName: article_claps
+
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_article_references
+                    foreignKeyName: fk_ar_article_id_to_articles_article_id
+                    references: articles(id)
+                  name: article_id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_article_references
+                    foreignKeyName: fk_ar_reference_article_id_to_articles_article_id
+                    references: users(id)
+                  name: reference_article_id
+                  type: BIGINT
+            tableName: article_references
+
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                  name: id
+                  type: INT
+              - column:
+                  constraints:
+                    nullable: false
+                    unique: true
+                    uniqueConstraintName: tag_name_uk
+                  name: name
+                  type: VARCHAR(30)
+            tableName: tags
+
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_article_to_tags
+                    foreignKeyName: fk_atg_to_article_id
+                    references: articles(id)
+                  name: article_id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_article_to_tags
+                    foreignKeyName: fk_atg_to_tag_id
+                    references: tags(id)
+                  name: tag_id
+                  type: INT
+            tableName: articles_to_tags
+
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                  name: id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_ai_to_article_id
+                    references: articles(id)
+                  name: article_id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: url
+                  type: VARCHAR(255)
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                  name: position
+                  type: INT
+            tableName: article_images
