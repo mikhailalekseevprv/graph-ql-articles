@@ -13,7 +13,7 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "article_images")
-public class ArticleImage {
+public class ArticleImageEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,7 +37,7 @@ public class ArticleImage {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        ArticleImage image = (ArticleImage) o;
+        ArticleImageEntity image = (ArticleImageEntity) o;
         return id != null && Objects.equals(id, image.id);
     }
 

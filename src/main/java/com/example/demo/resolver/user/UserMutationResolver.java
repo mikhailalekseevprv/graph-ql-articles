@@ -5,6 +5,7 @@ import com.example.demo.service.UserService;
 import graphql.kickstart.tools.GraphQLMutationResolver;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;
@@ -13,6 +14,7 @@ import javax.validation.constraints.Email;
 @Component
 @RequiredArgsConstructor
 @Validated
+@Transactional
 public class UserMutationResolver implements GraphQLMutationResolver {
 
     private final UserService userService;

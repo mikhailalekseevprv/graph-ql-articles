@@ -2,12 +2,21 @@ type Query {
     users: [User]
     userById(id: ID!): User
     usersByIds(ids: [ID!]!): [User]
+    imageById(id: ID!): ArticleImage
+    imagesByIds(ids: [ID!]!): [ArticleImage]
 }
 
 type Mutation {
     createUser(email: String!, password: String!, firstName: String!, lastName: String!, info: String): User
     updateUser(id: ID!, firstName: String, lastName: String, info: String): User
     deleteUser(id: ID!): Boolean
+    uploadImage(articleId: ID!, position: Int!): ArticleImage
+    updateImage(id: ID!, position: Int): ArticleImage
+    deleteImage(id: ID!): Boolean
+}
+
+type Article {
+    id: ID
 }
 
 type User {
@@ -17,4 +26,12 @@ type User {
     lastName: String
     avatar: String
     info: String
+    articles: [Article]
+}
+
+type ArticleImage {
+    id: ID
+    url: String
+    position: Int
+    article: Article
 }

@@ -5,12 +5,14 @@ import com.example.demo.service.UserService;
 import graphql.kickstart.tools.GraphQLQueryResolver;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Set;
 
 @Component
 @RequiredArgsConstructor
+@Transactional
 public class UserQueryResolver implements GraphQLQueryResolver {
 
     private final UserService userService;
