@@ -8,6 +8,8 @@ type Query {
     commentsByArticleId(articleId: ID!): [Comment]
     tagById(id: ID!): Tag
     tagsByIds(ids: [ID!]!): [Tag]
+    articleById(id: ID!): Article
+    articlesByIds(ids: [ID!]!): [Article]
 }
 
 type Mutation {
@@ -23,10 +25,27 @@ type Mutation {
     createTag(name: String!): Tag
     updateTag(id: ID!, name: String!): Tag
     deleteTag(id: ID!): Boolean
+    createArticle(type: ArticleType!, title: String!, text: String!, authorId: ID!, tagIds: [ID], referenceIds: [ID], scientificTheory: String, publicationStyle: String, geographicalTarget: String, ageTarget: String, sexTarget: String): Article
+    updateArticle(id: ID!, type: ArticleType, title: String, text: String, tagIds: [ID], referenceIds: [ID], scientificTheory: String, publicationStyle: String, geographicalTarget: String, ageTarget: String, sexTarget: String): Article
+    deleteArticle(id: ID!): Boolean
 }
 
 type Article {
     id: ID
+    type: ArticleType
+    title: String
+    text: String
+    author: User
+    comments: [Comment]
+    images: [ArticleImage]
+    tags: [Tag]
+    references: [Article]
+    createdAt: String
+    scientificTheory: String
+    publicationStyle: String
+    geographicalTarget: String
+    ageTarget: String
+    sexTarget: String
 }
 
 type User {
@@ -57,4 +76,10 @@ type Comment {
 type Tag {
     id: ID
     name: String
+}
+
+enum ArticleType {
+    SCIENTIFIC,
+    PUBLICIST,
+    MARKETING
 }

@@ -170,7 +170,7 @@ databaseChangeLog:
                     primaryKey: true
                     primaryKeyName: pk_article_references
                     foreignKeyName: fk_ar_reference_article_id_to_articles_article_id
-                    references: users(id)
+                    references: articles(id)
                   name: reference_article_id
                   type: BIGINT
             tableName: article_references
