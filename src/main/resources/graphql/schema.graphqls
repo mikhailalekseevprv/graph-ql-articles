@@ -4,6 +4,8 @@ type Query {
     usersByIds(ids: [ID!]!): [User]
     imageById(id: ID!): ArticleImage
     imagesByIds(ids: [ID!]!): [ArticleImage]
+    commentById(id: ID!): Comment
+    commentsByArticleId(articleId: ID!): [Comment]
 }
 
 type Mutation {
@@ -13,6 +15,9 @@ type Mutation {
     uploadImage(articleId: ID!, position: Int!): ArticleImage
     updateImage(id: ID!, position: Int): ArticleImage
     deleteImage(id: ID!): Boolean
+    createComment(articleId: ID!, userId: ID!, text: String!): Comment
+    updateComment(id: ID!, text: String!): Comment
+    deleteComment(id: ID!): Boolean
 }
 
 type Article {
@@ -33,5 +38,13 @@ type ArticleImage {
     id: ID
     url: String
     position: Int
+    article: Article
+}
+
+type Comment {
+    id: ID
+    text: String
+    createdAt: String
+    user: User
     article: Article
 }

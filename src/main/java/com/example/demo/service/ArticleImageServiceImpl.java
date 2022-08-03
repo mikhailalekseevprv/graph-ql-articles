@@ -19,13 +19,11 @@ import java.util.stream.StreamSupport;
 public class ArticleImageServiceImpl implements ArticleImageService {
 
     private final ArticleImageRepository articleImageRepository;
-    private final ArticleRepository articleRepository;
+    private final ArticleService articleService;
 
     @Override
     public ArticleImageEntity upload(long articleId, int position) {
-        ArticleEntity article = articleRepository.findById(articleId)
-            .orElseThrow(() -> new EntityNotFoundException(ArticleEntity.class, Long.toString(articleId)));
-
+        ArticleEntity article = articleService.getById(articleId);
         ArticleImageEntity articleImage = new ArticleImageEntity();
         articleImage.setPosition(position);
         articleImage.setUrl("Some-bucket/" + UUID.randomUUID());
