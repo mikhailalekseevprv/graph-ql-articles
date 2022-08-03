@@ -3,7 +3,6 @@ package com.example.demo.service;
 import com.example.demo.dao.entity.ArticleEntity;
 import com.example.demo.dao.entity.ArticleImageEntity;
 import com.example.demo.dao.repository.ArticleImageRepository;
-import com.example.demo.dao.repository.ArticleRepository;
 import com.example.demo.exception.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

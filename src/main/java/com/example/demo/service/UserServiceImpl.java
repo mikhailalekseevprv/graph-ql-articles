@@ -3,7 +3,7 @@ package com.example.demo.service;
 import com.example.demo.dao.entity.UserEntity;
 import com.example.demo.dao.repository.UserRepository;
 import com.example.demo.exception.EntityNotFoundException;
-import com.example.demo.exception.UserAlreadyExist;
+import com.example.demo.exception.EntityAlreadyExist;
 import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.stereotype.Service;
@@ -80,7 +80,7 @@ public class UserServiceImpl implements UserService {
 
     private void validateEmailNotExist(String email) {
         if (userRepository.existsByEmail(email)) {
-            throw new UserAlreadyExist(email);
+            throw new EntityAlreadyExist(UserEntity.class, "email", email);
         }
     }
 }

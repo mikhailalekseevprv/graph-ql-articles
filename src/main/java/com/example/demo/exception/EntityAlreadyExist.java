@@ -9,13 +9,13 @@ import lombok.Getter;
 
 import java.util.List;
 
-public class UserAlreadyExist extends RuntimeException implements GraphQLError {
+public class EntityAlreadyExist extends RuntimeException implements GraphQLError {
 
     @Getter
     private final String message;
 
-    public UserAlreadyExist(String email) {
-        this.message = String.format("User with email %s already exist", email);
+    public EntityAlreadyExist(Class<?> clazz, String property, String value) {
+        this.message = clazz.getSimpleName() + " already exist with " + property + "=" + value;
     }
 
     @Override

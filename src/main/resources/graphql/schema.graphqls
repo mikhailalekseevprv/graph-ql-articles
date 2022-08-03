@@ -6,6 +6,8 @@ type Query {
     imagesByIds(ids: [ID!]!): [ArticleImage]
     commentById(id: ID!): Comment
     commentsByArticleId(articleId: ID!): [Comment]
+    tagById(id: ID!): Tag
+    tagsByIds(ids: [ID!]!): [Tag]
 }
 
 type Mutation {
@@ -18,6 +20,9 @@ type Mutation {
     createComment(articleId: ID!, userId: ID!, text: String!): Comment
     updateComment(id: ID!, text: String!): Comment
     deleteComment(id: ID!): Boolean
+    createTag(name: String!): Tag
+    updateTag(id: ID!, name: String!): Tag
+    deleteTag(id: ID!): Boolean
 }
 
 type Article {
@@ -47,4 +52,9 @@ type Comment {
     createdAt: String
     user: User
     article: Article
+}
+
+type Tag {
+    id: ID
+    name: String
 }
